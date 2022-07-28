@@ -1,14 +1,12 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/HallBookingPortal');
+const mongoose=require('mongoose');
+mongoose.connect('mongodb://localhost:27017/Hall-Booking-system');
 const Schema = mongoose.Schema;
 
-var NewHallSchema = new Schema({
-    HallName: String,
-    NumberofSeats: String,
-    Location: String,
-    ImageUrl: String
-});
-
-var Halldata = mongoose.model('halldtls', NewHallSchema);                        
-
-module.exports = Halldata;
+var NewHallSchema= new Schema({
+    HallName:String,
+    Seats:Number,
+    Location:String,
+    Image:String
+})
+var NewHallData = mongoose.model('Hall', NewHallSchema);  
+module.exports=NewHallData;
