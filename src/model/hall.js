@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Hall-Booking-system');
+mongoose.connect('mongodb://localhost:27017/HallBookingPortal');
 const Schema = mongoose.Schema;
 
 var NewHallSchema= new Schema({
