@@ -2,7 +2,6 @@ const express = require("express");
 const AddHallRouter = express.Router();
 const HallData = require("../model/Hall");
 
-
 AddHallRouter.post('',(req,res)=>{
 
     var Hall={

@@ -5,7 +5,7 @@ const  AdminData= require('./src/model/admin');
 const  BookingData= require('./src/model/bookings');
 const  userData= require('./src/model/users');
 
-
+const jwt = require('jsonwebtoken')
 const path = require("path");
 
 var bodyparser=require('body-parser');
@@ -22,6 +22,22 @@ const EditHallRouter=require('./src/routes/EditHallRouter');
 const DeleteHallRouter=require('./src/routes/DeleteHallRouter');
 const AdminLoginRouter=require('./src/routes/AdminLoginRouter');
 
+function verifyToken(req, res, next) {
+    if(!req.headers.authorization) {
+      return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+    if(token === 'null') {
+      return res.status(401).send('Unauthorized request')    
+    }
+    let payload = jwt.verify(token, 'secretKey')
+    if(!payload) {
+      return res.status(401).send('Unauthorized request')    
+    }
+    req.userId = payload.subject
+    next()
+  }
+
 
 // to get admin name and password from database
 function getadmin(){
@@ -36,12 +52,12 @@ function getadmin(){
 
 // app.use(cors());
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use("/insert", AddHallRouter);
+app.use("/insert",verifyToken, AddHallRouter);
 app.use('/update',EditHallRouter)
 app.use('/remove',DeleteHallRouter);
 app.use('/adminLogin',AdminLoginRouter);
 
-app.get('/Halls',(req,res)=>{
+app.get('/Halls',verifyToken,(req,res)=>{
     HallData.find().then(function(Halls){
         res.send(Halls);
     })
