@@ -3,8 +3,8 @@ mongoose.connect('mongodb://localhost:27017/HallBookingPortal');
 const Schema = mongoose.Schema;
 
 var NewAdminSchema = new Schema({
-    AdminName: String,
-    AdminPassword: String
+    username: String,
+    password: String
   
 });
 var Admindata = mongoose.model('admin', NewAdminSchema);                        

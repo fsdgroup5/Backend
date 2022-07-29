@@ -5,10 +5,13 @@ const  AdminData= require('./src/model/admin');
 const  BookingData= require('./src/model/bookings');
 const  userData= require('./src/model/users');
 
+
 const path = require("path");
 
 var bodyparser=require('body-parser');
+
 var app = new express();
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use(bodyparser.json());
@@ -17,6 +20,7 @@ app.use(bodyparser.json());
 const AddHallRouter=require('./src/routes/AddHallRouter');
 const EditHallRouter=require('./src/routes/EditHallRouter');
 const DeleteHallRouter=require('./src/routes/DeleteHallRouter');
+const AdminLoginRouter=require('./src/routes/AdminLoginRouter');
 
 
 // to get admin name and password from database
@@ -35,6 +39,7 @@ function getadmin(){
 app.use("/insert", AddHallRouter);
 app.use('/update',EditHallRouter)
 app.use('/remove',DeleteHallRouter);
+app.use('/adminLogin',AdminLoginRouter);
 
 app.get('/Halls',(req,res)=>{
     HallData.find().then(function(Halls){
