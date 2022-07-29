@@ -3,7 +3,8 @@ mongoose.connect('mongodb://localhost:27017/HallBookingPortal');
 const Schema = mongoose.Schema;
 
 var NewUserSchema = new Schema({
-    UserName: String,
+    username: String,
+    password: String,
     UserId: String,
     UserMailId: String,
     Department: String

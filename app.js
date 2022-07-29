@@ -21,6 +21,7 @@ const AddHallRouter=require('./src/routes/AddHallRouter');
 const EditHallRouter=require('./src/routes/EditHallRouter');
 const DeleteHallRouter=require('./src/routes/DeleteHallRouter');
 const AdminLoginRouter=require('./src/routes/AdminLoginRouter');
+const UserLoginRouter=require('./src/routes/UserLoginRouter');
 
 function verifyToken(req, res, next) {
     if(!req.headers.authorization) {
@@ -56,6 +57,7 @@ app.use("/insert",verifyToken, AddHallRouter);
 app.use('/update',EditHallRouter)
 app.use('/remove',DeleteHallRouter);
 app.use('/adminLogin',AdminLoginRouter);
+app.use('/userLogin',UserLoginRouter);
 
 app.get('/Halls',verifyToken,(req,res)=>{
     HallData.find().then(function(Halls){
